@@ -117,4 +117,24 @@ length(which(snps_combined_missing[,2:100]==-9))
 length(which(snps_combined_missing == -9))
 
 
+#########################################
+## Missing data random across all loci ##
+#########################################
+
+head(snps)        # use the new data with one allele per locus (matrix of 500 ind x 100 loci)
+length(snps)
+
+snp.mat <- as.matrix(snps)
+head(snp.mat)
+dim(snp.mat)
+
+n <- round(0.1*length(snp.mat))   # change 0.1 (10%) to other percentages of missing data
+n 
+
+allsnps_10per <- snp.mat            # make a copy of the original snp data
+allsnps_10per[sample(1:length(allsnps_10per), n, replace=FALSE)] <- -9
+head(allsnps_10per) 
+
+length(which(allsnps_10per == -9))  #for 10% missing data, the length should = 5000
+
 
